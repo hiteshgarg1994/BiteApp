@@ -1,3 +1,4 @@
+var cors = require('cors')
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require("multer");
@@ -27,7 +28,7 @@ const upload = multer({
 });
 const app = express();
 const port = 3000;
-
+app.use(cors())
 app.get('/voice-recorder/:name', (req, res) => {
     try {
         const name = req.params.name;
