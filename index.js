@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const multer = require("multer");
 const p = require('path');
 
+const root = p.join(__dirname, 'dist');
+
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "public");
@@ -28,7 +30,13 @@ const upload = multer({
 });
 const app = express();
 const port = 3000;
-app.use(cors())
+app.use(cors());
+app.use(express.static('dist'));
+
+app.get('/', (req, res) => {
+    res.sendFile('index.html',{root})
+});
+
 app.get('/voice-recorder/:name', (req, res) => {
     try {
         const name = req.params.name;

@@ -42,4 +42,5 @@ testem.log
 .DS_Store
 Thumbs.db
 voice-recorder-api.iml
+BiteApp.iml
 package-lock.json
