@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
     res.sendFile('index.html',{root})
 });
 
-app.get('/voice-recorder/:name', (req, res) => {
+app.get('/api/voice-recorder/:name', (req, res) => {
     try {
         const name = req.params.name;
         const options = {
@@ -67,7 +67,7 @@ app.get('/voice-recorder/:name', (req, res) => {
     }
 });
 
-app.post('/voice-recorder', upload.single("audioData"), async (req, res) => {
+app.post('/api/voice-recorder/', upload.single("audioData"), async (req, res) => {
     try {
         res.status(200).send({
             'ResponseCode': '200',
@@ -76,7 +76,6 @@ app.post('/voice-recorder', upload.single("audioData"), async (req, res) => {
             'data': {fileName: p.parse(req.file.filename || "").name}
         })
     } catch (e) {
-        console.log(e.message);
         res.status(200).send({
             'ResponseCode': '500',
             'exceptionMessage': "Error while uploading file : " + e.message,
@@ -87,6 +86,7 @@ app.post('/voice-recorder', upload.single("audioData"), async (req, res) => {
 });
 
 app.get('*', function (req, res) {
+    console.log(req)
     res.send("Sorry !");
 });
 
